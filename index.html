@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .content {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container" id="login-container">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="content" id="protected-content">
+  <h1>Welcome to the protected content!</h1>
+  <p>This content is only visible to logged-in users.</p>
+</div>
+
+<script>
+  const allowedUsers = {
+    'Harrison': 'pass 13',
+    'Savya': 'default',
+    'Gabriel': 'default',
+    'James': 'default'
+  };
+
+  function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (allowedUsers[username] === password) {
+      // Hide the login container and show the protected content
+      document.getElementById('login-container').remove();
+      document.getElementById('protected-content').style.display = 'block';
+      
+      // Self-deletion: Remove the script itself after successful login
+      const scriptTag = document.querySelector('script');
+      scriptTag.remove();
+    } else {
+      alert('Incorrect username or password');
+    }
+  }
+</script>
+
+</body>
+</html>
